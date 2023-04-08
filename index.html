@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+    <h2>Js-Handson</h2>
+    <p class="p">&cir; Inheritance & Prototype</p>
+    <h3>1. Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h3>
+    <pre>
+        const parent={
+            fname:"xxxxx",
+            method:function mtd(){
+                console.log("inside parent object method "+this.fname);
+            }
+        }
+        const child={
+            __proto__ : parent
+        }
+        
+        child.method();
+        <!-- const ob1={
+            name:" prepbytes ",
+            method:function add(a,b){
+                console.log("sum :"+ a+b);
+            }
+        }
+        
+        const ob2={
+            __proto__:ob1,
+            id:"154",
+            method1:function mult(a,b){
+                console.log("multiplying:"+a*b);
+            }
+        }
+        
+        const ob3={
+            __proto__:ob2,
+        }
+        
+        ob3.method(2,3); -accessing ob1 add() function through ob3.
+        ob3.method1(2,3); -accessing ob2 mult() function through ob3.
+        console.log(ob2.name); -printing "name" property of ob1 through ob2. -->
+    </pre>
+    <h4>output:</h4><i>inside parent object method xxxxx</i>
+    <h3>2. Write code to explain prototype chaining.</h3>
+    <p>&ndash; All objects in JavaScript have a prototype. An object's prototype is also considered to be an object.That prototype object has a prototype of its own, and so on until an object is reached with null as its prototype. By definition, "null" has no prototype, and acts as the final link in this prototype chain. </p>
+    <pre>
+        const obj1={
+            fname:"srn",
+            id:1504,
+        }
+        obj1.__proto__.name="snsnsn";
+        console.log(obj1.__proto__); //{ name: 'snsnsn' }
+        console.log(obj1.name); //snsnsn
+                        
+                        or
+
+        const obj = {
+            a: 1,
+            b: 2,
+            // __proto__ sets the [[Prototype]]. It's specified here as another object literal.
+            __proto__: {
+              b: 3,
+              c: 4,
+              __proto__: {
+                d: 5,
+              },
+            },
+          };
+          
+          // { a: 1, b: 2 } -> { b: 3, c: 4 } -> { d: 5 } -> Object.prototype -> null
+          
+          console.log(obj.d); // 5
+          console.log(obj.e); //undefined.
+    </pre>
+    <h4>output:</h4><i>sum :23<br>multiplying:6<br>prepbytes </i>
+    <h3>3. Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum for multiple arrays</h3>
+    <pre>
+        Array.prototype.sum=function(){
+            let sum=0;
+            for(let i=0;i < this.length;i++){
+                sum+=this[i];
+            }
+            console.log(sum);
+        }
+        let arr=[1,2,3,4,5];
+        arr.sum();
+                        or
+        
+        const Add={
+            sum:function(arr){
+                let res=0;
+                    for(let i=0;i< arr.length;i++){
+                        res+=arr[i];
+                    }
+                    console.log("sum of array elements: "+ res);
+            }
+        }
+        Add.sum([1,2,3,4,5])
+    </pre>    
+    <h4>output:</h4><i>sum of array elements:15</i>
+    <h3>4. Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+    <p>&ndash; To get all own properties of an object in JavaScript, we can use the <mark>Object.getOwnPropertyNames()</mark> method.
+    This method returns an array containing all the names of the enumerable and non-enumerable own properties found directly on the object passed in as an argument.</p>
+    <pre>
+        const user = {
+            name: 'Alex',
+            age: 30
+        }
+        const props = Object.getOwnPropertyNames(user)
+        console.log(props) // [ 'name', 'age' ]
+    </pre>
+    <p>&ndash; if we want get only  enumerable properties of the object, use the <mark>Object.keys()</mark> method instead:</p>
+    <pre>
+        const user = {
+            name: 'Alex',
+            age: 30
+        }
+        const props = Object.keys(user)
+        console.log(props) // [ 'name', 'age' ]
+    </pre>
+</body>
+</html>
